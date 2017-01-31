@@ -1,0 +1,49 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <h1 class= "text-center"><%= @restaurant.name%></h1>
+      <ul>
+        <li> Category : <%= @restaurant.category %></li>
+        <li> Address : <%= @restaurant.address %></li>
+        <li> Phone number : <%= @restaurant.phone_number %></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="container">
+  <div class="row">
+  <h2 class="text-center"> Reviews </h2>
+    <% @restaurant.reviews.each do |review| %>
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <ul>
+          <li> Commentaire : <%= review.content %></li>
+          <li> Note : <%= review.rating %></li>
+        </ul>
+      </div>
+    <%end%>
+  </div>
+</div>
+<hr>
+<div class="container" style="margin-top: 20px">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <%= @restaurant.name %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <%= simple_form_for [@restaurant, @review] do |f| %>
+        <%= f.error_notification %>
+
+        <%= f.input :content %>
+        <%= f.input :rating, collection: (0..5).to_a %>
+
+        <%= f.button :submit %>
+      <% end %>
+    </div>
+  </div>
+</div>
